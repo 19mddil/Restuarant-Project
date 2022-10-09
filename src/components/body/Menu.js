@@ -6,7 +6,6 @@ class Menu extends Component {
     state = {
         dishes: DISHES
     }
-
     render() {
         const menu = this.state.dishes.map(item => {
             return (

@@ -5,7 +5,7 @@ const MenuItem = props => {
     console.log(props);
     return (
         <div>
-
+            {props.dish.name}
         </div>
     );
 }

@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 // let connector = connect(mapStateToProps);
 
 let connector = connect(state => {
-    console.log("map state to props", state);
     return {
         allDishes: state.dishes,
         sample: state.sample
@@ -21,8 +20,15 @@ let connector = connect(state => {
 
 class Home extends Component {
     componentDidMount() {
-        // console.log("Home State: ", this.state);
         console.log("Home Props: ", this.props);
+        this.props.dispatch({
+            type: 'TEST',
+            str: 'Restuarent'
+        });
+    }
+
+    componentDidUpdate() {
+        console.log('Home Props: ', this.props);
     }
 
     render() {

@@ -2,7 +2,20 @@ import React, { Component } from 'react';
 import { Form, Button, Input } from 'reactstrap';
 import { connect } from "react-redux";
 
-const connector = connect();
+const connector = connect(null, dispatch => {
+    return {
+        addComment: (dishId, rating, author, comment) => dispatch({
+            type: 'ADD_COMMENT',
+            payload: {
+                dishId: dishId,
+                author: rating,
+                rating: author,
+                comment: comment,
+            }
+        }),
+        deleteComment: null
+    }
+});
 
 class CommentForm extends Component {
     constructor(props) {
@@ -30,15 +43,7 @@ class CommentForm extends Component {
             rating: '',
             comment: '',
         });
-        this.props.dispatch({
-            type: 'ADD_COMMENT',
-            payload: {
-                dishId: this.props.dishId,
-                author: this.state.author,
-                rating: this.state.rating,
-                comment: this.state.comment
-            }
-        });
+        this.props.addComment(this.props.dishId, this.state.author, this.state.rating, this.state.comment)
     }
 
     render() {

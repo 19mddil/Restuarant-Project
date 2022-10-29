@@ -9,7 +9,6 @@ let connector = connect(state => {
     return {
         dishes: state.dishes,
         comments: state.comments
-
     }
 });
 

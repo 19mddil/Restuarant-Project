@@ -4,13 +4,29 @@ import DishDetail from "./DishDetail";
 import { CardColumns, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from "react-redux";
 
-let connector = connect(state => {
-    console.log("map state to props", state);
-    return {
-        dishes: state.dishes,
-        comments: state.comments
+let connector = connect(
+    state => {
+        // console.log("map state to props", state);
+        return {
+            dishes: state.dishes,
+            comments: state.comments
+        }
+    },
+    dispatch => {
+        return {
+            addComment: (dishId, rating, author, comment) => dispatch({
+                type: 'ADD_COMMENT',
+                payload: {
+                    dishId: dishId,
+                    author: rating,
+                    rating: author,
+                    comment: comment,
+                }
+            }),
+            deleteComment: null
+        }
     }
-});
+);
 
 
 /**
@@ -52,7 +68,7 @@ class Menu extends Component {
         let dishDetail = null;
         if (this.state.selectedDish != null) {
             const comments = this.props.comments.filter(comment => comment.dishId === this.state.selectedDish.id);
-            dishDetail = < DishDetail dish={this.state.selectedDish} comments={comments} />
+            dishDetail = < DishDetail dish={this.state.selectedDish} comments={comments} addComment={this.props.addComment} />
         }
         return (
             <div className="container">

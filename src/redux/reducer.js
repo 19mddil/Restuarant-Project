@@ -36,7 +36,15 @@ const commentReducer = (commentState = COMMENTS, action) => {
         default:
             return commentState;
     }
+}
 
+const contactReducer = (contactState = initialContactForm, action) => {
+    switch (action.type) {
+        case actionTypes.IS_AGREE:
+            return action.payload;
+        default:
+            return contactState;
+    }
 }
 
 export const Reducer = combineReducers({
@@ -44,5 +52,6 @@ export const Reducer = combineReducers({
     comments: commentReducer,
     ...createForms({
         feedback: initialContactForm
-    })
+    }),
+    contacts: contactReducer,
 })

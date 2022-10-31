@@ -3,15 +3,24 @@ import React, { Component } from "react";
 import { Button, FormGroup, Label, Col } from 'reactstrap'
 import { Form, Control, Errors, actions } from 'react-redux-form'
 import { connect } from 'react-redux'
+import { isAgree } from "../../redux/actionCreators";
 
-const connector = connect(null, dispatch => {
-    return {
-        resetFeedBackForm: () => {
-            console.log("here");
-            dispatch(actions.reset('feedback'));
+const connector = connect(
+    state => {
+        console.log("map state to props", state);
+        return {
+            agree: state.agree,
         }
-    }
-})
+    },
+    dispatch => {
+        return {
+            resetFeedBackForm: () => {
+                console.log("here");
+                dispatch(actions.reset('feedback'));
+            },
+            isAgree: agree => dispatch(isAgree(agree))
+        }
+    })
 
 const required = val => val && val.length;
 const isNumber = val => !isNaN(Number(val));
@@ -25,6 +34,7 @@ class Contact extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+
 
     handleInputChange = event => {
         const value = event.target.checked;
@@ -42,7 +52,9 @@ class Contact extends Component {
         console.log("here");
         this.props.resetFeedBackForm();
     }
-
+    componentDidMount() {
+        console.log(this.props);
+    }
     render() {
         document.title = 'Contact';
         return (
@@ -172,7 +184,7 @@ class Contact extends Component {
                                         model=".contactType"
                                         name="contactType"
                                         className="form-control"
-                                        disabled={!this.state.agree}
+                                        disabled={!this.props.isAgree(this.props.Agree)}
                                         defaultValue=""
                                     >
                                         <option>Tel.</option>

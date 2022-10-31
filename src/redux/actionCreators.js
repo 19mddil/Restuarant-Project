@@ -13,6 +13,15 @@ export const addComment = (dishId, rating, author, comment) => {
     }
 }
 
+export const isAgree = agree => {
+    return {
+        type: actionTypes.IS_AGREE,
+        payload: {
+            agree: agree
+        }
+    }
+}
+
 export const loadDishes = dishes => {
     return {
         type: actionTypes.LOAD_DISHES,

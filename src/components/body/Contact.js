@@ -52,7 +52,7 @@ class Contact extends Component {
                         <h3>Send Us your feedback.</h3>
                     </div>
                     <div className="col-12 col-md-7">
-                        <Form modal="feedback" onSubmit={values => this.handleSubmit(values)}>
+                        <Form model="feedback" onSubmit={values => this.handleSubmit(values)}>
                             <FormGroup row>
                                 <Label htmlFor="firstName" md={2}>First Name</Label>
                                 <Col md={10}>

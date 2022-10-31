@@ -5,20 +5,13 @@ import { Form, Control, Errors, actions } from 'react-redux-form'
 import { connect } from 'react-redux'
 import { isAgree } from "../../redux/actionCreators";
 
-const connector = connect(
-    state => {
-        console.log("map state to props", state);
-        return {
-            agree: state.agree,
-        }
-    },
+const connector = connect(null,
     dispatch => {
         return {
             resetFeedBackForm: () => {
                 console.log("here");
                 dispatch(actions.reset('feedback'));
             },
-            isAgree: agree => dispatch(isAgree(agree))
         }
     })
 
@@ -38,13 +31,10 @@ class Contact extends Component {
 
     handleInputChange = event => {
         const value = event.target.checked;
-        // if(value === true && )
         const name = event.target.name;
-        this.setState(
-            {
-                [name]: value,
-            }
-        );
+        this.setState({
+            [name]: value,
+        })
     }
 
     handleSubmit = values => {
@@ -180,13 +170,15 @@ class Contact extends Component {
                                     </FormGroup>
                                 </Col>
                                 <Col md={{ size: 3, offset: 1 }}>
+                                    Tell Us How!
                                     <Control.select
                                         model=".contactType"
                                         name="contactType"
                                         className="form-control"
-                                        disabled={!this.props.isAgree(this.props.Agree)}
+                                        disabled={!this.state.agree}
                                         defaultValue=""
                                     >
+                                        <option></option>
                                         <option>Tel.</option>
                                         <option>Email</option>
                                     </Control.select>

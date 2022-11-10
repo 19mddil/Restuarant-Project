@@ -14,6 +14,24 @@ export const addComment = (dishId, rating, author, comment) => {
     }
 }
 
+export const commentLoading = () => (
+    {
+        type: actionTypes.COMMENT_LOADING,
+    }
+)
+
+export const loadComments = comments => (
+    {
+        type: actionTypes.LOAD_COMMENTS,
+        payload: comments,
+    }
+)
+
+export const fetchComments = () => dispatch => {
+    dispatch(commentLoading);
+    axios.get(baseUrl + 'comments').then(res => res.data).then(comments => dispatch(loadComments(comments)));
+}
+
 export const isAgree = agree => {
     return {
         type: actionTypes.IS_AGREE,
